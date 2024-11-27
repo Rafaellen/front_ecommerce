@@ -1,0 +1,15 @@
+// src/styles/NavBar.module.scss
+.navbar {
+    background-color: #343a40;
+  }
+  
+  .navbar-brand {
+    color: #ffffff !important;
+  }
+  
+  .nav-link {
+    color: #ffffff !important;
+    &:hover {
+      color: #cccccc !important;
+    }
+  }

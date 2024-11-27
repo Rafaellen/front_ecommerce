@@ -1,0 +1,12 @@
+// src/styles/Cart.module.scss
+.cart-page {
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }

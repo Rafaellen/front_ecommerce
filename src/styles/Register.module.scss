@@ -1,0 +1,13 @@
+// src/styles/Register.module.scss
+.register-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+  }
+  
+  .card {
+    width: 20rem;
+    padding: 20px;
+  }
