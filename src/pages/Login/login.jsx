@@ -4,6 +4,7 @@ import { api } from '../../services/api';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import axios from 'axios';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -13,12 +14,10 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const response = await api.post('/users/login', { email, password });
+      const response = await axios.post('http://localhost:8080/users/login', { email, password });
       
-      // Logando a resposta completa para depuração
       console.log('Resposta do Servidor:', response);
 
-      // Verifique se o token está presente na resposta
       if (response.data && response.data.Token) {
         localStorage.setItem('token', response.data.Token);
         navigate('/home');
@@ -26,16 +25,13 @@ export default function Login() {
         alert('Login falhou: Token não encontrado na resposta.');
       }
     } catch (error) {
-      // Verifique se erro contém uma resposta do servidor
       if (error.response) {
         console.error('Erro:', error.response.status, error.response.data);
         alert(`Erro: ${error.response.data.message || 'Credenciais inválidas.'}`);
       } else if (error.request) {
-        // O pedido foi feito, mas nenhuma resposta foi recebida
         console.error('Erro na requisição:', error.request);
         alert('Erro na comunicação com o servidor. Verifique sua conexão.');
       } else {
-        // Algo aconteceu na configuração do request e desencadeou um erro
         console.error('Erro desconhecido:', error.message);
         alert('Ocorreu um erro inesperado. Tente novamente mais tarde.');
       }

@@ -17,11 +17,9 @@ function App() {
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/products" element={<Products />} />
           <Route exact path="/cart" element={<Cart />} />
-          <Route exact path="/payment" element={<Payment />} />
         </Routes>
       </Router>
     )
-  }
-  
+}
 
 export default App;

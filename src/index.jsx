@@ -1,13 +1,11 @@
-// src/index.jsx
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App'; // Certifique-se de que o caminho está correto e corresponde ao arquivo que você deseja usar
-import './index.css';
+import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './App';
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
