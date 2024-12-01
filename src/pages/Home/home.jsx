@@ -22,9 +22,27 @@ export default function Home() {
   const handleAddToCart = async (productId) => {
     try {
       await api.post('/cart/add', { productId, quantity: 1 });
+      console.log('Produto adicionado ao carrinho');
     } catch (error) {
       console.error('Erro ao adicionar produto ao carrinho:', error);
     }
+  };
+
+  const handleDeleteProduct = async (productId) => {
+    try {
+      await api.delete(`/products/${productId}`);
+      setProducts(products.filter(product => product.id !== productId));
+      console.log('Produto deletado com sucesso');
+    } catch (error) {
+      console.error('Erro ao deletar produto:', error);
+    }
+  };
+
+  const handleEditProduct = (updatedProduct) => {
+    setProducts(products.map(product => 
+      product.id === updatedProduct.id ? updatedProduct : product
+    ));
+    console.log('Produto editado com sucesso');
   };
 
   return (
@@ -32,7 +50,13 @@ export default function Home() {
       <NavBar />
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
         {products.map(product => (
-          <ProductCard key={product.id} product={product} onAddToCart={handleAddToCart} />
+          <ProductCard 
+            key={product.id} 
+            product={product} 
+            onAddToCart={handleAddToCart} 
+            onDelete={handleDeleteProduct}
+            onEdit={handleEditProduct}
+          />
         ))}
       </div>
     </>
