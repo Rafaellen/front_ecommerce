@@ -6,7 +6,7 @@ import Cart from './pages/Cart/cart';
 import Login from './pages/Login/login';
 import Register from './pages/Register/register';
 import Products from './pages/Products/products';
-
+import SuppliersPage from './pages/Suppliers/Suppliers';
 
 function App() {
     return (
@@ -17,6 +17,7 @@ function App() {
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/products" element={<Products />} />
           <Route exact path="/cart" element={<Cart />} />
+          <Route exact path="/suppliers" element={<SuppliersPage />} />
         </Routes>
       </Router>
     )

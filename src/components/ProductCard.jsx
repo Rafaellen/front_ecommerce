@@ -1,10 +1,9 @@
-// src/components/ProductCard.jsx
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { useState } from 'react';
-import { api } from '../services/api'
+import { api } from '../services/api';
 
-export default function ProductCard({ product, onAddToCart, onDelete, onEdit }) {
+export default function ProductCard({ product, onEdit, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedProduct, setEditedProduct] = useState({ ...product });
 
@@ -20,6 +19,15 @@ export default function ProductCard({ product, onAddToCart, onDelete, onEdit }) 
       setIsEditing(false);
     } catch (error) {
       console.error('Erro ao editar produto:', error);
+    }
+  };
+
+  const handleAddToCart = async (productId) => {
+    try {
+      await api.post('http://localhost:8080/cart/addCart', { productId, quantity: 1 });
+      alert('Produto adicionado ao carrinho com sucesso!');
+    } catch (error) {
+      console.error('Erro ao adicionar produto ao carrinho:', error);
     }
   };
 
@@ -41,7 +49,7 @@ export default function ProductCard({ product, onAddToCart, onDelete, onEdit }) 
             <Card.Text>{product.description}</Card.Text>
             <Card.Text>Preço: R${product.price}</Card.Text>
             <Card.Text>Estoque: {product.stock}</Card.Text>
-            <Button variant="primary" onClick={() => onAddToCart(product.id)}>
+            <Button variant="primary" onClick={() => handleAddToCart(product.id)}>
               Adicionar ao Carrinho
             </Button>
             <Button variant="info" onClick={() => setIsEditing(true)}>Editar</Button>

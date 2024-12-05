@@ -1,4 +1,3 @@
-// src/pages/Products/Products.jsx
 import { useState } from 'react';
 import { api } from '../../services/api';
 import Form from 'react-bootstrap/Form';
@@ -10,20 +9,21 @@ export default function Products() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     const convertedValue = (name === "price" || name === "stock") ? parseFloat(value) || 0 : value;
-
     setProductData({ ...productData, [name]: convertedValue });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log('Dados do produto antes da submissão:', productData);
+      
       if (productData.id) {
         await api.put(`/products/${productData.id}`, productData);
       } else {
         await api.post('/products', productData);
       }
+      
       setProductData({ name: '', description: '', price: 0, stock: 0, id: null });
     } catch (error) {
       console.error('Erro ao gerenciar produto:', error);
@@ -32,6 +32,12 @@ export default function Products() {
 
   const handleDelete = async () => {
     try {
+      if (!productData.id) {
+        console.log('Nenhum produto selecionado para deletar.');
+        return;
+      }
+      
+      console.log('Deletando produto com ID:', productData.id);
       await api.delete(`/products/${productData.id}`);
       setProductData({ name: '', description: '', price: 0, stock: 0, id: null });
     } catch (error) {

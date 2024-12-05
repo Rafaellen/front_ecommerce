@@ -1,3 +1,4 @@
+// src/pages/Login/login.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../services/api';
@@ -38,6 +39,10 @@ export default function Login() {
     }
   }
 
+  function handleRegisterClick() {
+    navigate('/register');
+  }
+
   return (
     <div className="login-page">
       <Card style={{ width: '20rem', margin: 'auto', marginTop: '10%' }}>
@@ -64,6 +69,13 @@ export default function Login() {
             </Form.Group>
             <Button variant="primary" type="submit" style={{ marginTop: '10px' }}>
               Login
+            </Button>
+            <Button 
+              variant="secondary" 
+              style={{ marginTop: '10px', marginLeft: '5px' }} 
+              onClick={handleRegisterClick}
+            >
+              Registrar
             </Button>
           </Form>
         </Card.Body>
